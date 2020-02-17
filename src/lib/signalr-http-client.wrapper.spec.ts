@@ -114,7 +114,7 @@ describe('SignalrHttpClientWrapper', () => {
         .flush('{"foo":"bar"}');
     });
 
-    describe('delete()', () =>  {
+    describe('delete()', () => {
       it('should resolve with a Signalr HttpResponse on success', (done) => {
         const expected = 200;
         service.delete('https://example.com/hub/test')
