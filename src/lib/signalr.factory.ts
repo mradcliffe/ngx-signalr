@@ -12,6 +12,29 @@ import { from, BehaviorSubject } from 'rxjs';
 import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 import { SignalrHubConnection } from './signalr-hub-connection';
 
+/**
+ * SignalR Options
+ *
+ * @param {@microsoft/signalr.IHttpConnectionOptions} options
+ *   URL Options to apply to the connection. An Angular HttpClient wrapper will be used as the httpClient option
+ *   by default. This allows for HTTP Middleware (Interceptors) to be applied to Signalr hub requests.
+ * @param {@microsoft/signalr.HttpClient} options.httpClient
+ * @param {@microsoft/signalr.HttpTransportType} options.transport
+ *   The transport type to use. This defaults to HttpTransportType.None.
+ * @param {@microsoft/signalr.ILogger} options.logger
+ *   The log level to use. This defaults to LogLevel.Error.
+ * @param {Function} options.accessTokenFactory
+ *   A function that returns a string or a Promise resolving as a string.
+ * @param {boolean} options.skipNegotiation
+ *   A boolean indicating if negotation should be skipped.
+ * @param {boolean} options.logMessageContent
+ *   A boolean indicating whether content should be logged. Enabling this may be a security risk.
+ * @param {@microsoft/signalr.IHubProtocol} protocol
+ *   The hub protocol to use. JsonHubProtocol will be used by default.
+ * @param {@microsoft/signalr.HubConnectionBuilder} builder
+ *   A preconfigured HubConnectionBuilder instance to use instead of creating a new one. This is most useful
+ *   when creating unit tests where SignalR is not available.
+ */
 export interface SignalrOptions {
   options: IHttpConnectionOptions;
   protocol: IHubProtocol;
@@ -46,14 +69,6 @@ export class SignalrFactory {
    *   connection.
    * @param {SignalrOptions} options
    *   Create the connection using specific configuration.
-   * @param {IHttpConnectionOptions} options.options
-   *   URL Options to apply to the connection. An Angular HttpClient wrapper will be used as the httpClient option
-   *   by default. This allows for HTTP Middleware (Interceptors) to be applied to Signalr hub requests.
-   * @param {IHubProtocol} options.protocol
-   *   The hub protocol to use. JsonHubProtocol will be used by default.
-   * @param {HubConnectionBuilder} options.builder
-   *   A preconfigured HubConnectionBuilder instance to use instead of creating a new one. This is most useful
-   *   when testing signalr.
    *
    * @returns {BehaviorSubject<HubConnection>}
    *   The connection returned in the subject is ready to use.
