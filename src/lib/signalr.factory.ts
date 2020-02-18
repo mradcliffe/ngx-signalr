@@ -9,7 +9,7 @@ import {
 } from '@microsoft/signalr';
 import { from, BehaviorSubject } from 'rxjs';
 
-import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 import { SignalrHubConnection } from './signalr-hub-connection';
 
 export interface SignalrOptions {
@@ -28,7 +28,7 @@ export const defaultSignalrOptions: SignalrOptions = {
 
 @Injectable()
 export class SignalrFactory {
-  constructor(private httpClient: HttpClientWrapper) {}
+  constructor(private httpClient: SignalrHttpClientWrapper) {}
 
   /**
    * Creates and subscribes to a new signalr hub connection.

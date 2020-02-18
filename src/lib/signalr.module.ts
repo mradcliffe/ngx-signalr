@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { SignalrFactory } from './signalr.factory';
-import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 
 @NgModule({
   declarations: [],
-  providers: [SignalrFactory, HttpClientWrapper],
+  providers: [SignalrFactory, SignalrHttpClientWrapper],
   imports: [],
   exports: [],
 })

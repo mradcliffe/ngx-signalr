@@ -4,7 +4,7 @@ import { HubConnection, Subject as SignalrSubject } from '@microsoft/signalr';
 import { map, skipWhile } from 'rxjs/operators';
 
 import { SignalrHubConnection } from './signalr-hub-connection';
-import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 
 describe('SignalrHubConnection', () => {
   let hubConnection: jasmine.SpyObj<HubConnection>;
@@ -12,7 +12,7 @@ describe('SignalrHubConnection', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HttpClientWrapper],
+      providers: [SignalrHttpClientWrapper],
     });
 
     hubConnection = jasmine.createSpyObj('HubConnection', [

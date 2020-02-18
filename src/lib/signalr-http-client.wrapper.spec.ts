@@ -6,19 +6,19 @@ import { HttpResponse } from '@microsoft/signalr';
 
 import { TestInterceptor } from './testing/test-interceptor';
 
-import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 
 describe('HttpClientWrapper', () => {
-  let service: HttpClientWrapper;
+  let service: SignalrHttpClientWrapper;
   let controller: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HttpClientWrapper, { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }],
+      providers: [SignalrHttpClientWrapper, { provide: HTTP_INTERCEPTORS, useClass: TestInterceptor, multi: true }],
     });
 
-    service = TestBed.inject(HttpClientWrapper);
+    service = TestBed.inject(SignalrHttpClientWrapper);
     controller = TestBed.inject(HttpTestingController);
   });
 

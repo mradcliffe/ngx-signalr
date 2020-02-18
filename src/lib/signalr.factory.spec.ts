@@ -4,7 +4,7 @@ import { HubConnectionBuilder, HubConnection } from '@microsoft/signalr';
 import { skipWhile } from 'rxjs/operators';
 
 import { defaultSignalrOptions, SignalrFactory } from './signalr.factory';
-import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
 
 
 describe('NgxSignalrFactory', () => {
@@ -15,7 +15,7 @@ describe('NgxSignalrFactory', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [SignalrFactory, HttpClientWrapper],
+      providers: [SignalrFactory, SignalrHttpClientWrapper],
     });
     service = TestBed.inject(SignalrFactory);
   });
