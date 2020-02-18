@@ -23,6 +23,8 @@ Angular | RxJS  | zone.js
 
 ## Usage
 
+### Create a SignalrHubConnection
+
 This provides a `SignalrFactory` with which will create and start a new [HubConnectios](https://docs.microsoft.com/en-us/javascript/api/%40microsoft/signalr/hubconnection?view=signalr-js-latest).
 
     this.signalrFactory
@@ -31,6 +33,8 @@ This provides a `SignalrFactory` with which will create and start a new [HubConn
 
 
 A `BehaviorSubject<SignalrHubConnection>` is returned from the factory. The `SignalrHubConnection` wraps the `HubConnection` methods in Observables.
+
+### Work with SignalrHubConnection
 
     // Subscribes to the "counted" method on the hub.
     const subject = connection.on<number>('counted');
@@ -46,6 +50,16 @@ A `BehaviorSubject<SignalrHubConnection>` is returned from the factory. The `Sig
     const count = 5;
     connection.invoke<number>('increment', count)
       .subscribe((n: number) => {});
+
+    // Send a method with arguments that only needs to check success.
+    connection.send('foo', 'bar)
+      .subscribe((success: boolean) => {
+        if (success) {
+          // Method was successful.
+        } else {
+          // Method was not successful.
+        }
+      });
 
 ## Contributing
 
