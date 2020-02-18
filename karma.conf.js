@@ -26,6 +26,18 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
+    customLauncers: {
+      ChromeHeadless: {
+        base: 'Chrome',
+        flags: [
+          '--disable-translate',
+          '--headless',
+          '--disable-gpu',
+          '--disable-extensions',
+          '--remote-debugging-port=9222',
+        ],
+      },
+    },
     singleRun: false,
     restartOnFileChange: true
   });

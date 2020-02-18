@@ -7,6 +7,7 @@
     "start": "ng serve",
     "build": "ng-packagr -p package.json",
     "test": "ng test -- --code-coverage",
+    "test:ci": "npm run test -- --browsers ChromeHeadless --watch=false --reporters=dots",
     "lint": "tslint --project ./tsconfig.json --config ./tslint.json --format stylish",
     "e2e": "ng e2e"
   },

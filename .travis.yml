@@ -1,0 +1,21 @@
+sudo: required
+dist: trusty
+
+addons.apt:
+  update: true
+  sources: google-chrome
+  packages: google-chrome-stable
+
+language: node_js
+
+notifications.email: false
+
+node_js:
+  - '10'
+  - '12'
+
+branches.except: "/^v\\d+\\.\\d+\\.\\d+$/"
+
+script:
+  - npm run lint
+  - npm run test:ci
