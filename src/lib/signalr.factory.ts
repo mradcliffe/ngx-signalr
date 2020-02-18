@@ -56,8 +56,7 @@ export class SignalrFactory {
    *   when testing signalr.
    *
    * @returns {BehaviorSubject<HubConnection>}
-   *   The connection returned in the subject is ready to use either by itself or by passing into the wrapper
-   *   methods of this service.
+   *   The connection returned in the subject is ready to use.
    */
   createHubConnection(endpoint: string, options: SignalrOptions = defaultSignalrOptions): BehaviorSubject<SignalrHubConnection> {
     const subject = new BehaviorSubject<SignalrHubConnection>(null);
