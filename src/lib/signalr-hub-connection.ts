@@ -8,7 +8,7 @@ import { catchError, map } from 'rxjs/operators';
  * This can be used on its own by passing in an existing HubConnection. It is expected that this is instantiated with
  * the NgxSignalrFactory.createHubConnection() method.
  */
-export class NgxSignalrHubConnection {
+export class SignalrHubConnection {
   /**
    * Constructor.
    *

@@ -9,16 +9,16 @@ import {
 } from '@microsoft/signalr';
 import { from, BehaviorSubject } from 'rxjs';
 
-import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
-import { NgxSignalrHubConnection } from './ngx-signalr-hub-connection';
+import { HttpClientWrapper } from './http-client.wrapper';
+import { SignalrHubConnection } from './signalr-hub-connection';
 
-export interface NgxSignalrOptions {
+export interface SignalrOptions {
   options: IHttpConnectionOptions;
   protocol: IHubProtocol;
   builder?: HubConnectionBuilder;
 }
 
-export const defaultNgxSignalrOptions: NgxSignalrOptions = {
+export const defaultSignalrOptions: SignalrOptions = {
   options: {
     transport: HttpTransportType.None,
     logger: LogLevel.Error,
@@ -27,8 +27,8 @@ export const defaultNgxSignalrOptions: NgxSignalrOptions = {
 };
 
 @Injectable()
-export class NgxSignalrFactory {
-  constructor(private httpClient: SignalrHttpClientWrapper) {}
+export class SignalrFactory {
+  constructor(private httpClient: HttpClientWrapper) {}
 
   /**
    * Creates and subscribes to a new signalr hub connection.
@@ -44,7 +44,7 @@ export class NgxSignalrFactory {
    * @param {string} endpoint
    *   The full hub URL including additional query parameters that may be necessary to pass-through a web socket
    *   connection.
-   * @param {NgxSignalrOptions} options
+   * @param {SignalrOptions} options
    *   Create the connection using specific configuration.
    * @param {IHttpConnectionOptions} options.options
    *   URL Options to apply to the connection. An Angular HttpClient wrapper will be used as the httpClient option
@@ -59,8 +59,8 @@ export class NgxSignalrFactory {
    *   The connection returned in the subject is ready to use either by itself or by passing into the wrapper
    *   methods of this service.
    */
-  createHubConnection(endpoint: string, options: NgxSignalrOptions = defaultNgxSignalrOptions): BehaviorSubject<NgxSignalrHubConnection> {
-    const subject = new BehaviorSubject<NgxSignalrHubConnection>(null);
+  createHubConnection(endpoint: string, options: SignalrOptions = defaultSignalrOptions): BehaviorSubject<SignalrHubConnection> {
+    const subject = new BehaviorSubject<SignalrHubConnection>(null);
     const urlOptions = Object.assign({ httpClient: this.httpClient }, options.options);
 
     const b = options.builder ? options.builder : new HubConnectionBuilder();
@@ -73,7 +73,7 @@ export class NgxSignalrFactory {
     }
 
     const connection = b.build();
-    const wrappedConnection = new NgxSignalrHubConnection(connection);
+    const wrappedConnection = new SignalrHubConnection(connection);
 
     // Subject will be completed when the connection is closed.
     connection.onclose((error?: Error) => {

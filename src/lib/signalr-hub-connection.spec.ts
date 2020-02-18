@@ -3,16 +3,16 @@ import { TestBed } from '@angular/core/testing';
 import { HubConnection, Subject as SignalrSubject } from '@microsoft/signalr';
 import { map, skipWhile } from 'rxjs/operators';
 
-import { NgxSignalrHubConnection } from './ngx-signalr-hub-connection';
-import { SignalrHttpClientWrapper } from './signalr-http-client.wrapper';
+import { SignalrHubConnection } from './signalr-hub-connection';
+import { HttpClientWrapper } from './http-client.wrapper';
 
-describe('NgxSignalrHubConnection', () => {
+describe('SignalrHubConnection', () => {
   let hubConnection: jasmine.SpyObj<HubConnection>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [SignalrHttpClientWrapper],
+      providers: [HttpClientWrapper],
     });
 
     hubConnection = jasmine.createSpyObj('HubConnection', [
@@ -34,13 +34,13 @@ describe('NgxSignalrHubConnection', () => {
 
   it('should create a wrapped connection and start it', () => {
     (hubConnection as any).connectionId = null;
-    const connection = new NgxSignalrHubConnection(hubConnection);
+    const connection = new SignalrHubConnection(hubConnection);
     expect(hubConnection.start).toHaveBeenCalled();
     expect(connection).toBeDefined();
   });
 
   it('should create a wrapped connection', () => {
-    const connection = new NgxSignalrHubConnection(hubConnection);
+    const connection = new SignalrHubConnection(hubConnection);
     expect(connection).toBeDefined();
     expect(connection.connection).toBeDefined();
   });
@@ -48,7 +48,7 @@ describe('NgxSignalrHubConnection', () => {
   describe('stop()', () => {
     it('should stop the connection', (done) => {
       hubConnection.stop.and.callFake(() => Promise.resolve());
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
       connection.stop()
         .subscribe((success) => {
           expect(success).toBe(true);
@@ -61,7 +61,7 @@ describe('NgxSignalrHubConnection', () => {
 
     it('should catch the error and return false when failing to stop the connection', (done) => {
       hubConnection.stop.and.callFake(() => Promise.reject('Error'));
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
       connection.stop()
         .subscribe((success) => {
           expect(success).toBe(false);
@@ -83,7 +83,7 @@ describe('NgxSignalrHubConnection', () => {
         spy = spyOn(methods, methodName);
       });
 
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
 
       connection.on<number>('test')
         .pipe(
@@ -108,7 +108,7 @@ describe('NgxSignalrHubConnection', () => {
       hubConnection.on.and.callFake(() => {});
       hubConnection.off.and.callFake(() => {});
 
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
       const subject = connection.on('test');
       spy = spyOn(subject, 'complete');
 
@@ -121,7 +121,7 @@ describe('NgxSignalrHubConnection', () => {
       hubConnection.on.and.callFake(() => {});
       hubConnection.off.and.callFake(() => {});
 
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
       connection.on('test');
 
       connection.off('test');
@@ -134,7 +134,7 @@ describe('NgxSignalrHubConnection', () => {
       const returnValue = 5;
       hubConnection.invoke.and.returnValue(Promise.resolve(returnValue));
 
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
 
       connection.invoke<number>('test')
         .subscribe((value) => {
@@ -150,7 +150,7 @@ describe('NgxSignalrHubConnection', () => {
   describe('send()', () => {
     it('should return true when successful', (done) => {
       hubConnection.send.and.returnValue(Promise.resolve());
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
 
       connection.send('test')
         .subscribe((success) => {
@@ -164,7 +164,7 @@ describe('NgxSignalrHubConnection', () => {
 
     it('should return false when not successful', (done) => {
       hubConnection.send.and.returnValue(Promise.reject());
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
 
       connection.send('test')
         .subscribe((success) => {
@@ -183,7 +183,7 @@ describe('NgxSignalrHubConnection', () => {
       const subject = new SignalrSubject<number>();
       hubConnection.stream.and.returnValue(subject);
 
-      const connection = new NgxSignalrHubConnection(hubConnection);
+      const connection = new SignalrHubConnection(hubConnection);
       connection.stream<number>('test')
         .pipe(
           skipWhile(value => value !== (max - 1)),

@@ -8,7 +8,7 @@ import {
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class SignalrHttpClientWrapper extends SignalrHttpClient {
+export class HttpClientWrapper extends SignalrHttpClient {
   constructor(private http: HttpClient) {
     super();
   }

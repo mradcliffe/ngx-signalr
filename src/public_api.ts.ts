@@ -2,7 +2,7 @@
  * Public API Surface of ngx-signalr
  */
 
-export * from './lib/ngx-signalr-hub-connection';
-export * from './lib/ngx-signalr.factory';
-export * from './lib/ngx-signalr.module';
-export * from './lib/signalr-http-client.wrapper';
+export * from './lib/signalr-hub-connection';
+export * from './lib/signalr.factory';
+export * from './lib/signalr.module';
+export * from './lib/http-client.wrapper';
