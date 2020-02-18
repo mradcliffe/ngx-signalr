@@ -42,7 +42,7 @@ describe('SignalrHubConnection', () => {
   it('should create a wrapped connection', () => {
     const connection = new SignalrHubConnection(hubConnection);
     expect(connection).toBeDefined();
-    expect(connection.connection).toBeDefined();
+    expect(connection.getConnection()).toBeDefined();
   });
 
   describe('stop()', () => {

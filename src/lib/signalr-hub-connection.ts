@@ -21,7 +21,7 @@ export class SignalrHubConnection {
     }
   }
 
-  get connection(): HubConnection {
+  getConnection(): HubConnection {
     return this._connection;
   }
 
