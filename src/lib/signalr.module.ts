@@ -6,6 +6,6 @@ import { HttpClientWrapper } from './http-client.wrapper';
   declarations: [],
   providers: [SignalrFactory, HttpClientWrapper],
   imports: [],
-  exports: [SignalrFactory, HttpClientWrapper],
+  exports: [],
 })
 export class SignalrModule {}
