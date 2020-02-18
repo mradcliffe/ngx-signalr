@@ -1,6 +1,6 @@
-# ngx-signalr [![Build Status](https://travis-ci.org/mradcliffe/ngx-signalr.svg?branch=master)](https://travis-ci.org/mradcliffe/ngx-signalr)
+# @mradcliffe/ngx-signalr [![Build Status](https://travis-ci.org/mradcliffe/ngx-signalr.svg?branch=master)](https://travis-ci.org/mradcliffe/ngx-signalr)
 
-> ngx-signalr is a [Angular](https://angular.io) module that provides an easy-to-use service to create [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction) hub connections. It wraps common SignalR methods in [RxJS](https://rxjs.dev/) observables and allows http client interceptors (middleware) to be used in connections.
+> @mradcliffe/ngx-signalr is a [Angular](https://angular.io) module that provides an easy-to-use service to create [SignalR](https://docs.microsoft.com/en-us/aspnet/core/signalr/introduction) hub connections. It wraps common SignalR methods in [RxJS](https://rxjs.dev/) observables and allows http client interceptors (middleware) to be used in connections.
 
 ## Table of Contents
 
