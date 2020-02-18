@@ -1,5 +1,5 @@
 {
-  "name": "ngx-signalr",
+  "name": "@mradcliffe/ngx-signalr",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
