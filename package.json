@@ -11,6 +11,7 @@
     "lint": "tslint --project ./tsconfig.json --config ./tslint.json --format stylish",
     "e2e": "ng e2e"
   },
+  "keywords": ["signalr", "angular"],
   "repository": {
     "type": "git",
     "url": "https://github.com/mradcliffe/ngx-signalr.git"
