@@ -32,13 +32,6 @@ describe('SignalrHubConnection', () => {
     (hubConnection as any).connectionId = '1';
   });
 
-  it('should create a wrapped connection and start it', () => {
-    (hubConnection as any).connectionId = null;
-    const connection = new SignalrHubConnection(hubConnection);
-    expect(hubConnection.start).toHaveBeenCalled();
-    expect(connection).toBeDefined();
-  });
-
   it('should create a wrapped connection', () => {
     const connection = new SignalrHubConnection(hubConnection);
     expect(connection).toBeDefined();

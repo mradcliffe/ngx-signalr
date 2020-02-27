@@ -90,30 +90,30 @@ export class SignalrFactory {
     const wrappedConnection = new SignalrHubConnection(connection);
 
     // Subject will be completed when the connection is closed.
-    connection.onclose((error?: Error) => {
+    wrappedConnection.getConnection().onclose((error?: Error) => {
       if (error) {
         subject.error(error);
       }
       subject.complete();
     });
 
-    connection.onreconnected(() => {
+    wrappedConnection.getConnection().onreconnected(() => {
       subject.next(wrappedConnection);
     });
 
-    connection.onreconnecting((error?: Error) => {
+    wrappedConnection.getConnection().onreconnecting((error?: Error) => {
       if (error) {
         subject.error(error);
       }
     });
 
-    from(connection.start())
-      .subscribe(() => {
-        subject.next(wrappedConnection);
-      }, (error) => {
-        subject.error(error);
-        subject.complete();
-      });
+    from(wrappedConnection.getConnection().start())
+    .subscribe(() => {
+      subject.next(wrappedConnection);
+    }, (error) => {
+      subject.error(error);
+      subject.complete();
+    });
 
     return subject;
   }

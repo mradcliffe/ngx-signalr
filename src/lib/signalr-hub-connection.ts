@@ -15,11 +15,7 @@ export class SignalrHubConnection {
    * @param {HubConnection} _connection
    *   A hub connection. If the connection has not been started, then it will be started.
    */
-  constructor(private _connection: HubConnection) {
-    if (!_connection.connectionId) {
-      _connection.start();
-    }
-  }
+  constructor(private _connection: HubConnection) {}
 
   getConnection(): HubConnection {
     return this._connection;
